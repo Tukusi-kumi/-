@@ -1,24 +1,75 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    
-h1{
-   font-family:"MS PGothic", sans-serif;
-   text-align:center;  
-   border-bottom:2px solid #ccc;
-   font-size: 20px; 
-}
-    
-</style>
+    h1 {
+      font-family: "MS PGothic", sans-serif;
+      text-align: center;
+      border-bottom: 2px solid #ccc;
+      font-size: 20px;
+    }
+    .intro {
+      text-align: center;
+      margin: 1em 0;
+    }
+    .links {
+      text-align: center;
+      margin: 1.5em 0;
+    }
+    .links a {
+      display: inline-block;
+      margin: 0 0.5em;
+      padding: 0.5em 1em;
+    }
+    .typewriter-cursor::after {
+      content: "|";
+      animation: blink 0.7s step-end infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+  </style>
   <title>Story</title>
 </head>
 <body>
-<h1>ツンしらの各話のリンク集です。<p>
-</p>好きなのを見てください<p>
-<a href="/tunsira/himitu.html">一話</a>
-<a href="/tunsira/kaeri.html">二話</a>
-<a href="/tunsira/date.html">三話</a>
+  <h1 id="title" class="typewriter-cursor"></h1>
+  <p class="intro"><span id="intro" class="typewriter-cursor"></span></p>
+  <nav class="links">
+    <a href="/tunsira/himitu.html">一話</a>
+    <a href="/tunsira/kaeri.html">二話</a>
+    <a href="/tunsira/date.html">三話</a>
+  </nav>
+
+  <script>
+    (function () {
+      var titleText = "ツンしらの各話のリンク集です。";
+      var introText = "好きなのを見てください";
+      var speed = 80;
+      var cursorSpeed = 0.7;
+
+      function typeWriter(el, text, delay, callback) {
+        el.textContent = "";
+        el.classList.add("typewriter-cursor");
+        var i = 0;
+        function type() {
+          if (i < text.length) {
+            el.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          } else {
+            el.classList.remove("typewriter-cursor");
+            if (callback) setTimeout(callback, 300);
+          }
+        }
+        setTimeout(type, delay);
+      }
+
+      typeWriter(document.getElementById("title"), titleText, 0, function () {
+        typeWriter(document.getElementById("intro"), introText, 0);
+      });
+    })();
+  </script>
 </body>
 </html>
